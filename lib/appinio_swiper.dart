@@ -44,6 +44,12 @@ class AppinioSwiper extends StatefulWidget {
   ///其他:自動判斷
   final int upOrDown;
 
+  /// →右滑觸發函式接口
+  final Function onSwipeToRight;
+
+  /// ←左滑觸發函式接口
+  final Function onSwipeToLeft;
+
   ///local version
   ///屏蔽上下滑動、下一個卡不露出來
   ///添加 int upOrDown判斷滑走傾斜方向
@@ -62,6 +68,8 @@ class AppinioSwiper extends StatefulWidget {
     this.onEnd = emptyFunction,
     this.unswipe = emptyFunctionBool,
     this.upOrDown = 0,
+    this.onSwipeToRight = emptyFunctionIndex,
+    this.onSwipeToLeft = emptyFunctionIndex,
   })  : assert(maxAngle >= 0 && maxAngle <= 360),
         assert(threshold >= 1 && threshold <= 100),
         super(key: key);
@@ -116,11 +124,13 @@ class _AppinioSwiperState extends State<AppinioSwiper>
         }
         if (widget.controller!.pressState == AppinioSwiperState.toLeft) {
           // print("toLeft");
+          widget.onSwipeToLeft(widget.cards!.length);
           _swipeHorizontal(context, false);
           _animationController.forward();
         }
         if (widget.controller!.pressState == AppinioSwiperState.toRight) {
           // print("toRight");
+          widget.onSwipeToRight(widget.cards!.length);
           _swipeHorizontal(context, true);
           _animationController.forward();
         }
