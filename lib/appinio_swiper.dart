@@ -166,10 +166,10 @@ class _AppinioSwiperState extends State<AppinioSwiper>
             widget.cards!.removeLast();
 
             widget.onSwipe(widget.cards!.length);
-            if (widget.controller!.pressState == AppinioSwiperState.toLeft) {
+            if (_swipedDirectionHorizontal == -1) {
               widget.onSwipeToLeft(widget.cards!.length);
             }
-            if (widget.controller!.pressState == AppinioSwiperState.toRight) {
+            if (_swipedDirectionHorizontal == 1) {
               widget.onSwipeToRight(widget.cards!.length);
             }
 
