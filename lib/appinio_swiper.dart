@@ -123,14 +123,10 @@ class _AppinioSwiperState extends State<AppinioSwiper>
           }
         }
         if (widget.controller!.pressState == AppinioSwiperState.toLeft) {
-          // print("toLeft");
-          widget.onSwipeToLeft(widget.cards!.length);
           _swipeHorizontal(context, false);
           _animationController.forward();
         }
         if (widget.controller!.pressState == AppinioSwiperState.toRight) {
-          // print("toRight");
-          widget.onSwipeToRight(widget.cards!.length);
           _swipeHorizontal(context, true);
           _animationController.forward();
         }
@@ -170,6 +166,13 @@ class _AppinioSwiperState extends State<AppinioSwiper>
             widget.cards!.removeLast();
 
             widget.onSwipe(widget.cards!.length);
+            if (widget.controller!.pressState == AppinioSwiperState.toLeft) {
+              widget.onSwipeToLeft(widget.cards!.length);
+            }
+            if (widget.controller!.pressState == AppinioSwiperState.toRight) {
+              widget.onSwipeToRight(widget.cards!.length);
+            }
+
             if (widget.cards!.isEmpty) widget.onEnd();
           } else if (_swipeTyp == 2) {
             _lastCard = null;
